@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from keras import Input, Model
-from keras.layers import Dense, Concatenate
+from keras.layers import Dense, Concatenate,Average
 import numpy as np
 
 class AutoModel(object):
@@ -23,8 +23,8 @@ class AutoModel(object):
             decoder_final = Dense(self.layers[2])(dense2)
             input_arr.append(input)
             encoder_cat.append(decoder_final)
-
-        x = Concatenate(axis=1)(encoder_cat)
+        
+        x = Average()(encoder_cat)
 
         decoder_cat = []
         for lenS in self.arr_len:
